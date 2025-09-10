@@ -431,6 +431,12 @@ def main(args):
                             em("""There are no taxa to display.""")
         else:
             em("""There are no taxa to display.""")
+        p("""
+            Note: When running the kraken2 approach bracken uses a threshold
+            (`bracken_threshold`). Those taxa with lower counts
+            are excluded from the results. This may affect the diversity
+            metrics and plots, such as the rarefaction curves.
+        """)
     #
     # 4. AMR
     #
