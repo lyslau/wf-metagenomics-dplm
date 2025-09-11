@@ -1,4 +1,4 @@
-# Metagenomics workflow
+# Metagenomics
 
 Taxonomic classification of metagenomic sequencing data.
 
