@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [v2.14.0]
+This minor release of wf-metagenomics fixes issues with missing files and zero divisions experienced when the coverage of input data is very low. 
+This version of wf-metagenomics also removes the real time analysis options in order to simplify the workflow.
+New solutions for real time taxonomic classification are in development but users who wish to continue using this functionality will need to pin wf-metagenomics v2.13.0.
+
 ### Changed
 - Updated to wf-template v5.6.2, changing:
     - Reduce verbosity of debug logging from fastcat which can occasionally occlude errors found in FASTQ files during ingress.
@@ -13,12 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - pre-commit configuration to resolve an internal dependency problem with flake8. This has no effect on the workflow.
 - Values in the diversity table appear as None if there are no reads in the sample.
 - Values in the abundance table are now integers instead of floats.
-- Remove real time option from common python scripts and move makeReport to the common module. This change does not impact workflow results.
-- Move `exclude_host` and related processes to `common_pipeline.nf`. Move `getVersions`, `getParams`, `run_amr` and `makeReport` to `main.nf`. This will not have any impact on the results.
 - Samples with fewer than 50% of the median read count across all samples are excluded from the rarefaction table. This is to avoid the rest of the samples being rarefied to a very low number of reads, which would lead to a loss of information.
 ### Fixed
 - Updated to wf-template v5.6.2, fixing:
-    - dacite.exceptions.WrongTypeError during report generation when barcode is null.
     - Sequence summary read length N50 incorrectly displayed minimum read length, it now correctly shows the N50.
     - Sequence summary component alignment and coverage plots failed to plot under some conditions.
 - Missing output file containing per-read assignments after identity and coverage filters when using `include_read_assignments` with the minimap2 subworkflow; this table is now correctly published to `{alias}_lineages.minimap2.assignments.tsv`.
@@ -27,10 +28,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `pandas.errors.EmptyDataError` encountered in the `getAlignmentStats` process when reference coverage does not reach 1x
 - `ZeroDivisionError: division by zero` encountered in the `progressive_bracken` process when there are no taxa identified at all.
 - Versions of some tools were not properly displayed in the report.
-- `raise ValueError("All objects passed were None")` caused by all samples containing zero classified reads after applying braken threshold.
+- `raise ValueError("All objects passed were None")` caused by all samples containing zero classified reads after applying bracken threshold.
 ### Removed
-- Real time functionality. This implies the deprecation of the following parameters: `server_threads`, `kraken_clients`, `port`, `host`, `external_kraken2`, `batch_size`, `real_time`, `read_limit`
-- Update image to remove kraken2-server dependency.
+- Real time functionality has been removed to simplify the workflow. The following parameters have been removed as they are no longer required: `server_threads`, `kraken_clients`, `port`, `host`, `external_kraken2`, `batch_size`, `real_time`, `read_limit`. Using these parameters in v2.14.0 onwards will cause an error.
+- Update image to remove kraken2-server dependency as it was only required by the real time workflow.
 
 
 ## [v2.13.0]
