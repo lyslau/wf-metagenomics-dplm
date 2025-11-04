@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [v2.14.1]
+This patch release of wf-metagenomics updates the AMR container image to ensure the workflow can be correctly executed on computers with ARM processors. Users do not need to adopt this release unless they are using the workflow on a computer with an ARM processor and make use of the AMR options.
+
+### Fixed
+- Updated Abricate Docker image to natively support ARM processors.
+
 ## [v2.14.0]
 This minor release of wf-metagenomics fixes issues with missing files and zero divisions experienced when the coverage of input data is very low. 
 This version of wf-metagenomics also removes the real time analysis options in order to simplify the workflow.
