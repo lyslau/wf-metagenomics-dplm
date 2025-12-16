@@ -8,9 +8,9 @@ include {
 process run_kraken2 {
     label 'wfmetagenomics'
     tag "${meta.alias}"
-    publishDir "${params.out_dir}/kraken2", mode: 'copy', pattern: "*kraken2.report.txt*"
+    publishDir "${params.outdir}/kraken2", mode: 'copy', pattern: "*kraken2.report.txt*"
     publishDir (
-        "${params.out_dir}/unclassified", mode: 'copy',
+        "${params.outdir}/unclassified", mode: 'copy',
         pattern: "${meta.alias}.unclassified.fq.gz", enabled: params.output_unclassified
     )
     cpus params.threads
@@ -72,7 +72,7 @@ process run_kraken2 {
 process run_bracken {
     label "wfmetagenomics"
     tag "${meta.alias}"
-    publishDir "${params.out_dir}/bracken", mode: 'copy', pattern: "*bracken*"
+    publishDir "${params.outdir}/bracken", mode: 'copy', pattern: "*bracken*"
     cpus Math.max(params.threads - 2, 2)
     memory {8.GB * task.attempt - 1.GB}
     maxRetries 1
@@ -128,7 +128,7 @@ process run_bracken {
 // Concatenate kraken reports per read
 process output_kraken2_read_assignments {
     label "wfmetagenomics"
-    publishDir "${params.out_dir}/reads_assignments", mode: 'copy', pattern: "*_lineages.kraken2.assignments.tsv"
+    publishDir "${params.outdir}/reads_assignments", mode: 'copy', pattern: "*_lineages.kraken2.assignments.tsv"
     tag "${meta.alias}"
     cpus 2
     memory "4 GB"
