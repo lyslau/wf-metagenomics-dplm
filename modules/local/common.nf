@@ -61,7 +61,7 @@ process getVersionsCommon {
 // Process to collapse lineages info into abundance dataframes.
 process createAbundanceTables {
     label "wfmetagenomics"
-    publishDir "${params.out_dir}", mode: 'copy', pattern: "abundance_table_*.tsv"
+    publishDir "${params.outdir}", mode: 'copy', pattern: "abundance_table_*.tsv"
     cpus 1
     memory "2 GB"
     input:
@@ -83,7 +83,7 @@ Use for example to output the unclassified reads.
  */
 process publishReads {
     label "wfmetagenomics"
-    publishDir "${params.out_dir}/${output_name}", mode: 'copy', pattern: "*.${output_name}.fq.gz", enabled: params.output_unclassified
+    publishDir "${params.outdir}/${output_name}", mode: 'copy', pattern: "*.${output_name}.fq.gz", enabled: params.output_unclassified
     tag "${meta.alias}"
     cpus 1
     memory 4.GB
