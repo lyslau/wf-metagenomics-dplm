@@ -1,7 +1,7 @@
 process exclude_host_reads {
     label "wfmetagenomics"
-    publishDir "${params.out_dir}/host_bam", mode: 'copy', pattern: "*.host.bam*"
-    publishDir "${params.out_dir}/no_host_bam", mode: 'copy', pattern: "*.unmapped.bam*"
+    publishDir "${params.outdir}/host_bam", mode: 'copy', pattern: "*.host.bam*"
+    publishDir "${params.outdir}/no_host_bam", mode: 'copy', pattern: "*.unmapped.bam*"
     tag "${meta.alias}"
     cpus params.threads
     // cannot use maxRetries based on exitcodes 137
