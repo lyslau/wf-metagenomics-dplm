@@ -2,7 +2,7 @@ import groovy.json.JsonBuilder
 
 process abricateVersion {
     label "amr"
-    publishDir "${params.out_dir}", mode: 'copy', pattern: "versions.txt", overwrite: true
+    publishDir "${params.outdir}", mode: 'copy', pattern: "versions.txt", overwrite: true
     cpus 1
     memory "2 GB"
     input:
@@ -40,7 +40,7 @@ process getVersions {
 
 process getVersionsCommon {
     label "wf_common"
-    publishDir "${params.out_dir}", mode: 'copy', pattern: "versions_all.txt"
+    publishDir "${params.outdir}", mode: 'copy', pattern: "versions_all.txt"
     cpus 1
     memory "2GB"
     input:
