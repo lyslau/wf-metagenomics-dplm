@@ -5,7 +5,7 @@ import groovy.json.JsonBuilder
 // We need the union because there is a common reference
 process filter_references {
     label "wfmetagenomics"
-    publishDir "${params.out_dir}/igv_reference", mode: 'copy', pattern: "reduced_reference.*"
+    publishDir "${params.outdir}/igv_reference", mode: 'copy', pattern: "reduced_reference.*"
     cpus params.threads
     memory "7 GB"
     input:
