@@ -23,7 +23,7 @@ process abricate{
 
 process abricate_json{
     label "wfmetagenomics"
-    publishDir path: "${params.out_dir}/amr", mode: 'copy', pattern: "*.json", saveAs: { filename -> "${meta.alias}.amr.json" }
+    publishDir path: "${params.outdir}/amr", mode: 'copy', pattern: "*.json", saveAs: { filename -> "${meta.alias}.amr.json" }
     cpus 1
     memory "2 GB"
     input:
