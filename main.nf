@@ -25,6 +25,7 @@ OPTIONAL_FILE = file("$projectDir/data/OPTIONAL_FILE")
 // entrypoint workflow
 WorkflowMain.initialise(workflow, params, log)
 workflow {
+    //params.outdir
     Pinguscript.ping_start(nextflow, workflow, params)
 
     // Checking user parameters
@@ -111,6 +112,7 @@ workflow {
         ingress_samples = fastq_ingress([
             "input":params.fastq,
             "sample": params.sample,
+            "output": params.output,
             "sample_sheet": params.sample_sheet,
             "analyse_unclassified":params.analyse_unclassified,
             "stats": true,
@@ -124,6 +126,7 @@ workflow {
         ingress_samples = xam_ingress([
             "input":params.bam,
             "sample":params.sample,
+            "output": params.output,
             "sample_sheet":params.sample_sheet,
             "analyse_unclassified":params.analyse_unclassified,
             "return_fastq": true,
