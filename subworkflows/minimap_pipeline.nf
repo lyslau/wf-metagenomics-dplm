@@ -13,11 +13,11 @@ process minimap {
     tag "${meta.alias}"
     cpus params.threads
     publishDir (
-        "${params.out_dir}/bams", mode: 'copy',
+        "${params.outdir}/bams", mode: 'copy',
         pattern: "${meta.alias}.reference.bam*",
         enabled: (params.keep_bam || params.igv))
     publishDir (
-        "${params.out_dir}/bams", mode: 'copy',
+        "${params.outdir}/bams", mode: 'copy',
         pattern: "${meta.alias}.bamstats_results",
         enabled: (params.keep_bam || params.igv))
     // due to the wf fail at the samtools step
@@ -90,7 +90,7 @@ process minimapTaxonomy {
     label "wfmetagenomics"
     tag "${meta.alias}"
     cpus 1
-    publishDir "${params.out_dir}/reads_assignments", mode: 'copy', pattern: "*_lineages.minimap2.assignments.tsv", enabled: params.include_read_assignments
+    publishDir "${params.outdir}/reads_assignments", mode: 'copy', pattern: "*_lineages.minimap2.assignments.tsv", enabled: params.include_read_assignments
     memory 4.GB
     input:
         tuple val(meta), path(assignments)
@@ -140,7 +140,7 @@ process minimapTaxonomy {
 
 process extractMinimap2Reads {
     label "wfmetagenomics"
-    publishDir "${params.out_dir}/extracted", mode: 'copy', pattern: "*.minimap2.extracted.fastq"
+    publishDir "${params.outdir}/extracted", mode: 'copy', pattern: "*.minimap2.extracted.fastq"
     tag "${meta.alias}"
     cpus 1
     memory "7 GB" //depends on the size of the BAM file.
@@ -181,7 +181,7 @@ Run python script to parse the data and output the alignment table
 process getAlignmentStats {
     label "wfmetagenomics"
     tag "${meta.alias}"
-    publishDir "${params.out_dir}/alignment_tables", mode: 'copy', pattern: "*-alignment-stats.tsv"
+    publishDir "${params.outdir}/alignment_tables", mode: 'copy', pattern: "*-alignment-stats.tsv"
     cpus Math.max(params.threads, 2)
     //depends on number of references and their lengths. There are also custom databases of varying sizes.
     memory "7 GB"
